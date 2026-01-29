@@ -36,23 +36,25 @@ Where $\phi(B)$ represents the autoregressive polynomial, $\theta(B)$ represents
 
 **LSTM Model**
 
-The LSTM network uses memory cells with three control mechanisms (gates) to regulate information flow:
+The LSTM network is a recurrent neural architecture designed to better handle long-term dependencies than a standard RNN.
 
-**Forget Gate**: Determines what information to discard from the cell state
-$$f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$$
+It uses **memory cells** and **gates** to control the flow of information over time. In a simplified form, the LSTM cell update can be expressed as:
 
-**Input Gate**: Controls what new information to store in the cell state
-$$i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$$
-$$\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$$
+$$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
+$$h_t = o_t \odot \tanh(C_t)$$
 
-**Output Gate**: Regulates what parts of the cell state to output
-$$o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)$$
+Where:
 
-The cell state and hidden state are updated as:
-$$C_t = f_t * C_{t-1} + i_t * \tilde{C}_t$$
-$$h_t = o_t * \tanh(C_t)$$
+- $f_t$ is the forget gate (what to discard from the past),
+- $i_t$ is the input gate (what new information to store),
+- $o_t$ is the output gate (what information to expose at time $t$),
+- $C_t$ is the cell state and $h_t$ the hidden state.
 
-Where $\sigma$ is the sigmoid function and $W$ and $b$ represent weights and biases respectively.
+Thanks to this mechanism, the LSTM can:
+
+- retain consumption trends over several hours or days,
+- ignore noisy or irrelevant fluctuations,
+- better capture complex non-linear relationships present in energy time series.
 
 ### 📈 Key Results
 
