@@ -18,43 +18,15 @@ The study evaluates both models on hourly energy consumption data to determine w
 
 ### 🧮 Methodology
 
-The software system is modeled through two distinct forecasting approaches:
+We compared two forecasting approaches:
 
 **ARIMA Model**
 
-The ARIMA model is characterized by three parameters $(p, d, q)$:
-
-- **p**: Order of the Autoregressive (AR) component
-- **d**: Degree of differencing (Integrated component)  
-- **q**: Order of the Moving Average (MA) component
-
-The model equation for ARIMA$(p,d,q)$ can be expressed as:
-
-$$\phi(B)(1-B)^d y_t = \theta(B)\epsilon_t$$
-
-Where $\phi(B)$ represents the autoregressive polynomial, $\theta(B)$ represents the moving average polynomial, $B$ is the backshift operator, and $\epsilon_t$ represents white noise.
+ARIMA is a classical statistical model that uses past values and past errors to predict future energy consumption. It works by identifying patterns in historical data and extrapolating them forward. We used ARIMA(1,0,0) configuration in this study.
 
 **LSTM Model**
 
-The LSTM network is a recurrent neural architecture designed to better handle long-term dependencies than a standard RNN.
-
-It uses **memory cells** and **gates** to control the flow of information over time. In a simplified form, the LSTM cell update can be expressed as:
-
-$$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
-$$h_t = o_t \odot \tanh(C_t)$$
-
-Where:
-
-- $f_t$ is the forget gate (what to discard from the past),
-- $i_t$ is the input gate (what new information to store),
-- $o_t$ is the output gate (what information to expose at time $t$),
-- $C_t$ is the cell state and $h_t$ the hidden state.
-
-Thanks to this mechanism, the LSTM can:
-
-- retain consumption trends over several hours or days,
-- ignore noisy or irrelevant fluctuations,
-- better capture complex non-linear relationships present in energy time series.
+LSTM is a deep learning model based on neural networks that can learn complex temporal patterns in data. Unlike ARIMA, LSTM can capture non-linear relationships and longer-term dependencies in energy consumption patterns. It uses memory mechanisms to retain important information while filtering out noise.
 
 ### 📈 Key Results
 
@@ -66,10 +38,10 @@ Experiments conducted on the Hourly Energy Consumption dataset reveal:
 
 **Precise Alignment**: The LSTM network demonstrated remarkable alignment between predicted values and actual observations, even on unseen test data, confirming its ability to model complex sequential dependencies.
 
-| Model | MSE |
-|-------|-----|
+| Model         | MSE          |
+| ------------- | ------------ |
 | ARIMA (1,0,0) | 1,250,099.61 |
-| LSTM | 434,007.12 |
+| LSTM          | 434,007.12   |
 
 ### Visualization of Results
 
@@ -85,7 +57,6 @@ This figure illustrates the temporal evolution of ARIMA predictions compared to 
 
 The LSTM model demonstrates superior performance with extremely precise alignment between predicted values and actual observations. The network effectively captures complex temporal dependencies that traditional statistical models fail to model.
 
-
 ### 🛠️ Technologies & Tools
 
 - **Language**: Python
@@ -96,6 +67,6 @@ The LSTM model demonstrates superior performance with extremely precise alignmen
 
 ### 📚 References
 
-1. Nashirah Abu Bakar and Sofian Rosbi. "Autoregressive Integrated Moving Average (ARIMA) Model for Forecasting Cryptocurrency Exchange Rate in High Volatility Environment: A New Insight of Bitcoin Transaction". In: *IJAERS* 4.11 (2017), pp. 130–137.
+1. Nashirah Abu Bakar and Sofian Rosbi. "Autoregressive Integrated Moving Average (ARIMA) Model for Forecasting Cryptocurrency Exchange Rate in High Volatility Environment: A New Insight of Bitcoin Transaction". In: _IJAERS_ 4.11 (2017), pp. 130–137.
 
-2. Christian Bakke Vennerød, Adrian Kjærran, and Erling Stray Bugge. *Long Short-term Memory RNN*. May 14, 2021. arXiv: 2105.06756[cs].
+2. Christian Bakke Vennerød, Adrian Kjærran, and Erling Stray Bugge. _Long Short-term Memory RNN_. May 14, 2021. arXiv: 2105.06756[cs].
