@@ -18,8 +18,6 @@ The study evaluates both models on hourly energy consumption data to determine w
 
 ### 🧮 Methodology
 
-The software system is modeled through two distinct forecasting approaches:
-
 **ARIMA Model**
 
 The ARIMA model is characterized by three parameters $(p, d, q)$:
